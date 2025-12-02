@@ -83,7 +83,7 @@ jobs:
         if: steps.version_check.outputs.NEW_VERSION_AVAILABLE == 'true'
         uses: softprops/action-gh-release@v2
         env:
-          GITHUB_TOKEN: ${{ sectrets.GITHUB_TOKEN || secrets.RELEASE_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN || secrets.RELEASE_TOKEN }}
         with:
           tag_name: ${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}
           name: IceRaven Dark Theme ${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}
