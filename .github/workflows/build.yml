@@ -72,7 +72,7 @@ jobs:
           apksigner sign --ks keystore.jks --ks-pass pass:${{ secrets.KEYSTORE_PASSPHRASE }} --key-pass pass:${{ secrets.KEY_PASSWORD }} iceraven-patched-signed.apk
       - name: Upload APK as Artifact
         if: steps.version_check.outputs.NEW_VERSION_AVAILABLE == 'true'
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: iceraven-dark-apk
           path: iceraven-patched-signed.apk
