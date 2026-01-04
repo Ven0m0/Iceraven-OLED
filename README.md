@@ -18,3 +18,8 @@ While many Firefox-based browsers exist, Iceraven stands out with its:
 ---
 
 *Note: Requires Android device with ARM64-v8a architecture.*
+
+### Credit
+
+- Upstream
+- https://github.com/lumiknit/ff-android-patches.git
