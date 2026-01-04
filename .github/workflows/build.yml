@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       # --- NEW STEP: Get latest release info from THIS repository ---
       - name: Get latest release info from this repo
@@ -27,7 +27,6 @@ jobs:
           # but for checking your own repo, 'owner/repo' isn't usually needed.
           # If this action ever fails to find a release, its outputs will be empty.
       # ----------------------------------------------------------------
-
       - name: Install Dependencies
         run: |
           sudo apt update
@@ -51,10 +50,8 @@ jobs:
         run: |
           UPSTREAM_VERSION="${{ steps.get_upstream_release.outputs.ICERAVEN_VERSION }}"
           THIS_REPO_VERSION="${{ steps.this_repo_latest_release.outputs.tag_name }}"
-
           echo "Upstream IceRaven version: $UPSTREAM_VERSION"
           echo "This repository's latest release version: ${THIS_REPO_VERSION:-"No previous release found."}"
-
           if [ "$UPSTREAM_VERSION" != "$THIS_REPO_VERSION" ]; then
             echo "::set-output name=NEW_VERSION_AVAILABLE::true"
             echo "New version available! Building and releasing."
@@ -83,7 +80,6 @@ jobs:
           name: iceraven-dark-apk
           path: iceraven-patched-signed.apk
       # -------------------------------------------------
-
       - name: Create Release
         id: create_release
         # The condition now directly uses the output from the version_check step
@@ -99,5 +95,3 @@ jobs:
             
             This APK is automatically built and patched for a dark theme.
           files: iceraven-patched-signed.apk
-
-      # Removed the second "Get latest release info" step, as it's now handled upfront.
